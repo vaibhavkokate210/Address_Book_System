@@ -63,7 +63,7 @@ public class AddressBookMain
 	{
 		boolean condition=true;
 		AddressBookMain obj=new AddressBookMain();
-	
+	     obj.addPerson();
 		System.out.println("Thank you");
 	}
 

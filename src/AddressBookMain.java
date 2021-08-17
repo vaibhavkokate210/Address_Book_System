@@ -135,13 +135,44 @@ public class AddressBookMain
 			}
 		}
 	}
+	public void viewAllContacts()
+	{
+		System.out.println("First Name        Last Name      Address       City       State       Zip      Phone Number     Email");
+		System.out.println("======================================================================================================");
+		for(int j=0;j<I;j++)
+		{
+				if(abm[j]!=null)
+				{
+					System.out.println(abm[j].firstName+"         "+abm[j].lastName+"        "+abm[j].address+"       "+abm[j].city+"     "+abm[j].state+"     "+abm[j].zip+"     "+abm[j].phoneNumber+"      "+abm[j].email);
+				}
+		}
+		System.out.println();
+	}
 	public static void main(String[] args) 
 	{
 		boolean condition=true;
 		AddressBookMain obj=new AddressBookMain();
-	     obj.addPerson();
-	     obj.editPerson();
-	     obj.deletePerson();
+		while(condition)
+         {
+			int choice = 0;
+			System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Exit");
+			System.out.println("Enter your choice :");
+			Scanner sc=new Scanner(System.in);
+			choice=sc.nextInt();
+			switch(choice)
+			{
+			case 1:obj.addPerson();
+					break;
+			case 2:obj.editPerson();
+					break;
+			case 3:obj.deletePerson();
+					break;
+			case 4:obj.viewAllContacts();
+					break;
+			case 5:condition=false;
+			       break;
+			}
+	     }
 		System.out.println("Thank you");
 	}
 

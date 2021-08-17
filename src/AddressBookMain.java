@@ -122,12 +122,26 @@ public class AddressBookMain
 			}
 		}
 	}
+	public void deletePerson()
+	{
+		System.out.println("Enter first name do you want to delete contact :");
+		Scanner ip=new Scanner(System.in);
+		String name=ip.nextLine();
+		for(int j=0;j<I;j++)
+		{
+			if(abm[j].firstName.equals(name)&&abm[j]!=null)
+			{
+				abm[j]=null;
+			}
+		}
+	}
 	public static void main(String[] args) 
 	{
 		boolean condition=true;
 		AddressBookMain obj=new AddressBookMain();
 	     obj.addPerson();
 	     obj.editPerson();
+	     obj.deletePerson();
 		System.out.println("Thank you");
 	}
 

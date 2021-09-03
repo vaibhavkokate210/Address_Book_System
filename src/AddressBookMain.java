@@ -1,28 +1,9 @@
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
-class AddressBook
-{
-	public String firstName;
-	public String lastName;
-	public String address;
-	public String city;
-	public String state;
-	public int zip;
-	public int phoneNumber;
-	public String email;
-	
-	public AddressBook(String firstName,String lastName,String address,String city,String state,int zip,int phoneNumber,String email)
-	{
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.address=address;
-		this.city=city;
-		this.state=state;
-		this.zip=zip;
-		this.phoneNumber=phoneNumber;
-		this.email=email;
-	}
-}
 public class AddressBookMain
 {
 	public AddressBook abm[]=new AddressBook[10];
@@ -150,30 +131,51 @@ public class AddressBookMain
 	}
 	public static void main(String[] args) 
 	{
-		boolean condition=true;
-		AddressBookMain obj=new AddressBookMain();
-		while(condition)
-         {
-			int choice = 0;
-			System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Exit");
-			System.out.println("Enter your choice :");
-			Scanner sc=new Scanner(System.in);
-			choice=sc.nextInt();
-			switch(choice)
-			{
-			case 1:obj.addPerson();
-					break;
-			case 2:obj.editPerson();
-					break;
-			case 3:obj.deletePerson();
-					break;
-			case 4:obj.viewAllContacts();
-					break;
-			case 5:condition=false;
-			       break;
-			}
-	     }
-		System.out.println("Thank you");
+		Map<String,AddressBookMain> addressBookSet=new HashMap<String,AddressBookMain>();
+		AddressBookMain obj[]=new AddressBookMain[10];
+		int i=1;
+		while(true)
+		{
+			System.out.println("Enter Address book name");
+			Scanner sc1=new Scanner(System.in);
+			String name=sc1.nextLine();
+    		boolean condition=true;
+	    	obj[i]=new AddressBookMain();
+		    while(condition)
+            {
+			     int choice = 0;
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Exit");
+			     System.out.println("Enter your choice :");
+			     Scanner sc=new Scanner(System.in);
+			     choice=sc.nextInt();
+			     switch(choice)
+			     {
+			        case 1:obj[i].addPerson();
+					       break;
+			        case 2:obj[i].editPerson();
+					       break;
+			        case 3:obj[i].deletePerson();
+					       break;
+			        case 4:obj[i].viewAllContacts();
+					       break;
+			        case 5:condition=false;
+			               break;
+		     	 }
+	         }
+		    addressBookSet.put(name, obj[i]);
+		    System.out.println("Do you want add another address book : y/n");
+		    String choice=sc1.nextLine();
+		    if(choice.equals("y"))
+		    {
+		    	i++;
+		    	continue;
+		    }
+		    else
+		    {
+		    	break;
+		    }
+		}
+		System.out.println(addressBookSet);
 	}
 
 }

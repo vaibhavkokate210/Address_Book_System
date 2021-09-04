@@ -28,22 +28,26 @@ public class AddressBookMain
 		Scanner scc=new Scanner(System.in);
 		System.out.println("Enter first name :");
 		firstName=sc.nextLine();
+		System.out.println("Enter Last name :");
+		lastName=sc.nextLine();
 		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
 		{
  			ArrayList<AddressBook> book=record.getValue();
 			for(AddressBook abook:book)
 			{
-			       if(abook.firstName.equals(firstName))
+			       if(abook.firstName.equals(firstName)&&abook.lastName.equals(lastName))
 			       {
 			    	   System.out.println("person already exit .......please enter another name");
+			    	   System.out.println("Enter first name :");
 			    	   firstName=sc.nextLine();
+			    	   System.out.println("Enter Last name :");
+			   		   lastName=sc.nextLine();
 			    	   break;
 			       } 	   
 			}
 		
 		}
-		System.out.println("Enter Last name :");
-		lastName=sc.nextLine();
+		
 		System.out.println("Enter address name :");
 		address=sc.nextLine();
 		System.out.println("Enter city name :");

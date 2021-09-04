@@ -6,11 +6,11 @@ public class AddressBook
 	public String address;
 	public String city;
 	public String state;
-	public int zip;
-	public int phoneNumber;
+	public String zip;
+	public String phoneNumber;
 	public String email;
 	
-	public AddressBook(String firstName,String lastName,String address,String city,String state,int zip,int phoneNumber,String email)
+	public AddressBook(String firstName,String lastName,String address,String city,String state,String zip,String phoneNumber,String email)
 	{
 		this.firstName=firstName;
 		this.lastName=lastName;

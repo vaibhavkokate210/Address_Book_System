@@ -12,8 +12,6 @@ public class AddressBookMain
 {
 	Map<String,ArrayList<AddressBook>> addressBookSet=new HashMap<String,ArrayList<AddressBook>>();
 	ArrayList<AddressBook> addressBook;
-	//public AddressBook abm[]=new AddressBook[10];
-	//public static int I=0;
 	public void addPerson()
 	{
 		String firstName;
@@ -28,14 +26,16 @@ public class AddressBookMain
 		Scanner scc=new Scanner(System.in);
 		System.out.println("Enter first name :");
 		firstName=sc.nextLine();
+		final String first=firstName;
 		System.out.println("Enter Last name :");
 		lastName=sc.nextLine();
+		final String last=lastName;
 		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
 		{
  			ArrayList<AddressBook> book=record.getValue();
 			for(AddressBook abook:book)
 			{
-			       if(abook.firstName.equals(firstName)&&abook.lastName.equals(lastName))
+			       if(book.stream().anyMatch(ob->ob.firstName.equals(first)&&ob.lastName.equals(last)))
 			       {
 			    	   System.out.println("person already exit .......please enter another name");
 			    	   System.out.println("Enter first name :");

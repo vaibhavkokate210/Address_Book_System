@@ -202,17 +202,11 @@ public class AddressBookMain
 		System.out.println("Enter city or state of person which u want count:");
 		Scanner ip=new Scanner(System.in);
 		String cityOrState=ip.nextLine();
-		int count=0;
+		long count=0;
 		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
 		{
  			ArrayList<AddressBook> book=record.getValue();
-			for(AddressBook abook:book)
-			{
-			       if(abook.city.equals(cityOrState)||abook.state.equals(cityOrState))
-			       {
-			    	   count++;
-			       }
-			}
+ 			count=book.stream().filter(ob->ob.city.equals(cityOrState)||ob.state.equals(cityOrState)).count();
 		}
 		if(count!=0)
 			System.out.println("City/State = "+cityOrState+" Count = "+count);

@@ -209,6 +209,51 @@ public class AddressBookMain
 		else
 			System.out.println("No reocord found for city/state "+cityOrState);
 	}
+	public void sortByCityOrStateOrZip()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Which way u want to sort :\n1. City\n2. State\n3. Zip");
+		int num=sc.nextInt();
+		if(num==1)
+		{
+		      for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
+		      {
+ 		        	System.out.println("*********************************************"+record.getKey()+"***************************************");
+ 		        	ArrayList<AddressBook> book=record.getValue();
+ 		        	System.out.println("========================================================================================");
+ 		        	System.out.println("First Name\tLast Name\tAddressCity\tState\tZip\tPhone Number\tEmail");
+ 		        	System.out.println("========================================================================================");
+ 		        	book.stream().sorted(Comparator.comparing(AddressBook::getCity)).forEach(ob->System.out.println(ob.firstName+"\t\t"+ob.lastName+"\t\t"+ob.address+"\t"+ob.city+"\t"+ob.state+"\t"+ob.zip+"\t"+ob.phoneNumber+"\t"+ob.email));;
+ 		        	System.out.println("========================================================================================");
+		       }
+		}
+		else if(num==2)
+		{
+			 for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
+		      {
+		        	System.out.println("*********************************************"+record.getKey()+"***************************************");
+		        	ArrayList<AddressBook> book=record.getValue();
+		        	System.out.println("========================================================================================");
+		        	System.out.println("First Name\tLast Name\tAddressCity\tState\tZip\tPhone Number\tEmail");
+		        	System.out.println("========================================================================================");
+		        	book.stream().sorted(Comparator.comparing(AddressBook::getState)).forEach(ob->System.out.println(ob.firstName+"\t\t"+ob.lastName+"\t\t"+ob.address+"\t"+ob.city+"\t"+ob.state+"\t"+ob.zip+"\t"+ob.phoneNumber+"\t"+ob.email));;
+		        	System.out.println("========================================================================================");
+		       }
+		}
+		else if(num==3)
+		{
+			for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
+		      {
+		        	System.out.println("*********************************************"+record.getKey()+"***************************************");
+		        	ArrayList<AddressBook> book=record.getValue();
+		        	System.out.println("========================================================================================");
+		        	System.out.println("First Name\tLast Name\tAddressCity\tState\tZip\tPhone Number\tEmail");
+		        	System.out.println("========================================================================================");
+		        	book.stream().sorted(Comparator.comparing(AddressBook::getZip)).forEach(ob->System.out.println(ob.firstName+"\t\t"+ob.lastName+"\t\t"+ob.address+"\t"+ob.city+"\t"+ob.state+"\t"+ob.zip+"\t"+ob.phoneNumber+"\t"+ob.email));;
+		        	System.out.println("========================================================================================");
+		       }
+		}
+	}
 	public static void main(String[] args) 
 	{	
 		AddressBookMain abm=new AddressBookMain();
@@ -224,7 +269,7 @@ public class AddressBookMain
 		    while(condition)
             {
 			     int choice = 0;
-			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Exit");
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Exit");
 			     System.out.println("Enter your choice :");
 			     Scanner sc=new Scanner(System.in);
 			     choice=sc.nextInt();
@@ -244,7 +289,9 @@ public class AddressBookMain
 			        		break;
 			        case 7:abm.countByCityOrState();
 			               break;
-			        case 8:condition=false;
+			        case 8:abm.sortByCityOrStateOrZip();
+			               break;
+			        case 9:condition=false;
 			               break;
 		     	 }
 	         }

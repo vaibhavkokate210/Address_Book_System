@@ -169,6 +169,27 @@ public class AddressBookMain
 
 		}
 	}
+	public void searchByCityOrState()
+	{
+		System.out.println("Enter city or state of person which u want :");
+		Scanner ip=new Scanner(System.in);
+		String cityOrState=ip.nextLine();
+		int count=0;
+		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
+		{
+ 			ArrayList<AddressBook> book=record.getValue();
+			for(AddressBook abook:book)
+			{
+			       if(abook.city.equals(cityOrState)||abook.state.equals(cityOrState))
+			       {
+			    	   System.out.println("Person "+abook.firstName+" found in  "+cityOrState);
+			    	   count++;
+			       }
+			}
+		}
+		if(count==0)
+			System.out.println("No person available in "+cityOrState);
+	}
 	public static void main(String[] args) 
 	{	
 		AddressBookMain abm=new AddressBookMain();
@@ -184,7 +205,7 @@ public class AddressBookMain
 		    while(condition)
             {
 			     int choice = 0;
-			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Exit");
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. Exit");
 			     System.out.println("Enter your choice :");
 			     Scanner sc=new Scanner(System.in);
 			     choice=sc.nextInt();
@@ -198,7 +219,9 @@ public class AddressBookMain
 					       break;
 			        case 4:abm.viewAllContacts();
 					       break;
-			        case 5:condition=false;
+			        case 5:abm.searchByCityOrState();
+			        	   break;
+			        case 6:condition=false;
 			               break;
 		     	 }
 	         }

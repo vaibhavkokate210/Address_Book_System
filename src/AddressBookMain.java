@@ -203,13 +203,36 @@ public class AddressBookMain
 			{
 			       if(abook.city.equals(cityOrState)||abook.state.equals(cityOrState))
 			       {
-			    	   System.out.println("Person = "+abook.firstName+" "+abook.lastName+" City/State = "+cityOrState);
+			    	   System.out.println("Person = "+abook.firstName+" "+abook.lastName+" City/State = "+cityOrState+"\n");
 			    	   count++;
 			       }
 			}
 		}
 		if(count==0)
 			System.out.println("No person available in "+cityOrState);
+	}
+	
+	public void countByCityOrState()
+	{
+		System.out.println("Enter city or state of person which u want count:");
+		Scanner ip=new Scanner(System.in);
+		String cityOrState=ip.nextLine();
+		int count=0;
+		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
+		{
+ 			ArrayList<AddressBook> book=record.getValue();
+			for(AddressBook abook:book)
+			{
+			       if(abook.city.equals(cityOrState)||abook.state.equals(cityOrState))
+			       {
+			    	   count++;
+			       }
+			}
+		}
+		if(count!=0)
+			System.out.println("City/State = "+cityOrState+" Count = "+count);
+		else
+			System.out.println("No reocord found for city/state "+cityOrState);
 	}
 	public static void main(String[] args) 
 	{	
@@ -226,7 +249,7 @@ public class AddressBookMain
 		    while(condition)
             {
 			     int choice = 0;
-			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n 7. Exit");
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Exit");
 			     System.out.println("Enter your choice :");
 			     Scanner sc=new Scanner(System.in);
 			     choice=sc.nextInt();
@@ -244,7 +267,9 @@ public class AddressBookMain
 			        	   break;
 			        case 6:abm.viewByCityOrState();
 			        		break;
-			        case 7:condition=false;
+			        case 7:abm.countByCityOrState();
+			               break;
+			        case 8:condition=false;
 			               break;
 		     	 }
 	         }

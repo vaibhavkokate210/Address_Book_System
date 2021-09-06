@@ -177,7 +177,7 @@ public class AddressBookMain
 		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
 		{
  			ArrayList<AddressBook> book=record.getValue();
- 			boolean match=book.stream().anyMatch(ob->ob.city.equals(cityOrState)&&ob.state.equals(cityOrState));
+ 			boolean match=book.stream().anyMatch(ob->ob.city.equals(cityOrState)||ob.state.equals(cityOrState));
  			if(match)
  				System.out.println("Person found in "+cityOrState+" city/State ");
  			else
@@ -188,23 +188,14 @@ public class AddressBookMain
 	{
 		System.out.println("Enter city or state of person which u want view:");
 		Scanner ip=new Scanner(System.in);
-		String cityOrState=ip.nextLine();
+		final String cityOrState=ip.nextLine();
 		int count=0;
 		for(Map.Entry<String, ArrayList<AddressBook>> record : this.addressBookSet.entrySet())
 		{
  			ArrayList<AddressBook> book=record.getValue();
-			for(AddressBook abook:book)
-			{
-			       if(abook.city.equals(cityOrState)||abook.state.equals(cityOrState))
-			       {
-			    	   System.out.println("Person = "+abook.firstName+" "+abook.lastName+" City/State = "+cityOrState+"\n");
-			    	   count++;
-			       }
-			}
+ 			book.stream().filter(ob->ob.city.equals(cityOrState)||ob.state.equals(cityOrState)).forEach(ob->System.out.println("Person = "+ob.firstName+ " "+ob.lastName+" City/State ="+cityOrState+"\n"));
 		}
-		if(count==0)
-			System.out.println("No person available in "+cityOrState);
-	}
+     }
 	
 	public void countByCityOrState()
 	{

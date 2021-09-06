@@ -1,5 +1,6 @@
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AddressBookMain
 {
@@ -45,7 +47,7 @@ public class AddressBookMain
 			    	   break;
 			       } 	   
 			}
-		
+			book.stream().sorted(Comparator.comparing(AddressBook::getFirstName)).collect(Collectors.toList());
 		}
 		
 		System.out.println("Enter address name :");
@@ -159,14 +161,8 @@ public class AddressBookMain
 			System.out.println("========================================================================================");
 			System.out.println("First Name\tLast Name\tAddressCity\tState\tZip\tPhone Number\tEmail");
 			System.out.println("========================================================================================");
-			for(AddressBook abook:book)
-			{
-				
-                System.out.println(abook.firstName+"\t\t"+abook.lastName+"\t\t"+abook.address+"\t"+abook.city+"\t"+abook.state+"\t"+abook.zip+"\t"+abook.phoneNumber+"\t"+abook.email);
-                System.out.println();
-			}
+			book.stream().sorted(Comparator.comparing(AddressBook::getFirstName)).forEach(ob->System.out.println(ob.firstName+"\t\t"+ob.lastName+"\t\t"+ob.address+"\t"+ob.city+"\t"+ob.state+"\t"+ob.zip+"\t"+ob.phoneNumber+"\t"+ob.email));;
 			System.out.println("========================================================================================");
-
 		}
 	}
 	public void searchByCityOrState()

@@ -1,4 +1,13 @@
 import java.awt.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -254,7 +263,52 @@ public class AddressBookMain
 		       }
 		}
 	}
-	public static void main(String[] args) 
+	
+	public void WriteInFile() throws IOException
+	{
+        File fileToSaveObject=new File("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBook.txt");
+        if(fileToSaveObject.exists())
+        {
+        	System.out.println("Files exists to writing ");
+        }
+        else
+        	fileToSaveObject.createNewFile();
+        
+        FileOutputStream fileOut = new FileOutputStream(fileToSaveObject);
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(addressBookSet);
+        out.close();
+        fileOut.close(); 
+	}
+	
+	public void readingFromFile() throws IOException, ClassNotFoundException 
+	{
+        File fileToReadObject=new File("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBook.txt");
+        FileInputStream fileIn = new FileInputStream(fileToReadObject);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        if(fileToReadObject.exists())
+        {
+             Map<String,ArrayList<AddressBook>> address= (Map<String, ArrayList<AddressBook>>) in.readObject(); 
+             for(Map.Entry<String, ArrayList<AddressBook>> record : address.entrySet())
+     		{
+      			System.out.println("*********************************************"+record.getKey()+"***************************************");
+     			ArrayList<AddressBook> book=record.getValue();
+     			System.out.println("========================================================================================");
+     			System.out.println("First Name\tLast Name\tAddressCity\tState\tZip\tPhone Number\tEmail");
+     			System.out.println("========================================================================================");
+     			book.stream().sorted(Comparator.comparing(AddressBook::getFirstName)).forEach(ob->System.out.println(ob.firstName+"\t\t"+ob.lastName+"\t\t"+ob.address+"\t"+ob.city+"\t"+ob.state+"\t"+ob.zip+"\t"+ob.phoneNumber+"\t"+ob.email));;
+     			System.out.println("========================================================================================");
+     		}
+        }
+        else
+        {
+        	System.out.println("File in not exist");
+        }
+        in.close();
+        fileIn.close();
+    }
+	
+	public static void main(String[] args) throws Exception 
 	{	
 		AddressBookMain abm=new AddressBookMain();
 		int i=1;
@@ -269,7 +323,7 @@ public class AddressBookMain
 		    while(condition)
             {
 			     int choice = 0;
-			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Exit");
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Write Into file\n10. Read from file\n11. Exit");
 			     System.out.println("Enter your choice :");
 			     Scanner sc=new Scanner(System.in);
 			     choice=sc.nextInt();
@@ -291,7 +345,11 @@ public class AddressBookMain
 			               break;
 			        case 8:abm.sortByCityOrStateOrZip();
 			               break;
-			        case 9:condition=false;
+			        case 9:abm.WriteInFile();
+			        		break;
+			        case 10:abm.readingFromFile();
+			        		break;
+			        case 11:condition=false;
 			               break;
 		     	 }
 	         }

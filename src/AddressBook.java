@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class AddressBook
+public class AddressBook implements Serializable
 {
 	public String firstName;
 	public String lastName;

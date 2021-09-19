@@ -9,6 +9,5 @@
 	<classpathentry kind="lib" path="C:/Users/Jeeva/Downloads/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jeeva/Downloads/commons-text-1.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jeeva/Downloads/opencsv-5.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jeeva/Downloads/gson-1.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

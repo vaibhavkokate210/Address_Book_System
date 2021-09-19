@@ -2,6 +2,7 @@ import java.awt.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,10 +20,15 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+
 public class AddressBookMain
 {
 	Map<String,ArrayList<AddressBook>> addressBookSet=new HashMap<String,ArrayList<AddressBook>>();
 	ArrayList<AddressBook> addressBook;
+	public static String PathName = "file.txt";
+	public static String PathCsvName = "file-csv.csv";
 	public void addPerson()
 	{
 		String firstName;
@@ -308,6 +314,41 @@ public class AddressBookMain
         fileIn.close();
     }
 	
+	public void writeDataInCSV() throws IOException 
+	{
+         Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
+    CSVWriter csvWriter = new CSVWriter(new FileWriter("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv"));
+    if (Files.exists(path)){
+        System.out.println("File Exists, so appending it ");
+    }
+    else {
+        System.out.println("File not exists, So creating new file ");
+        Files.createFile(path);
+    }
+
+    ArrayList<String[]> data = new ArrayList<>();
+    data.add(new String[] {"FirstName","LastName" ,"Address" ,"City","State","ZipCode","Phone Number","EmailID"});
+    for (int i = 0; i < addressBook.size(); i++) {
+        data.add( new String[] {addressBook.get(i).firstName , addressBook.get(i).lastName , addressBook.get(i).address ,
+        		addressBook.get(i).city, addressBook.get(i).state , addressBook.get(i).zip , addressBook.get(i).phoneNumber , addressBook.get(i).email});
+    }
+    csvWriter.writeAll(data);
+    csvWriter.close();
+}
+	
+	public void readFromCSVFile() throws CsvValidationException, IOException 
+	{
+        Path path = Paths.get("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv");
+        File file = new File("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv");
+        Scanner inputStream = new Scanner(file);
+        while (inputStream.hasNext()){
+            String data = inputStream.next();
+            System.out.println(data);
+        }
+        inputStream.close();
+    }
+	
+	
 	public static void main(String[] args) throws Exception 
 	{	
 		AddressBookMain abm=new AddressBookMain();
@@ -323,7 +364,7 @@ public class AddressBookMain
 		    while(condition)
             {
 			     int choice = 0;
-			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Write Into file\n10. Read from file\n11. Exit");
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Write Into file\n10. Read from file\n11. Write In CSV\n12. Read from CSV\n13. Exit");
 			     System.out.println("Enter your choice :");
 			     Scanner sc=new Scanner(System.in);
 			     choice=sc.nextInt();
@@ -349,7 +390,11 @@ public class AddressBookMain
 			        		break;
 			        case 10:abm.readingFromFile();
 			        		break;
-			        case 11:condition=false;
+			        case 11:abm.writeDataInCSV();
+			        		break;
+			        case 12:abm.readFromCSVFile();
+			        		break;
+			        case 13:condition=false;
 			               break;
 		     	 }
 	         }

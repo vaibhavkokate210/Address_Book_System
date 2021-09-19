@@ -318,7 +318,7 @@ public class AddressBookMain
 	public void writeDataInCSV() throws IOException 
 	{
          Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
-    CSVWriter csvWriter = new CSVWriter(new FileWriter("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv"));
+    CSVWriter csvWriter = new CSVWriter(new FileWriter("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv"));
     if (Files.exists(path)){
         System.out.println("File Exists, so appending it ");
     }
@@ -339,8 +339,8 @@ public class AddressBookMain
 	
 	public void readFromCSVFile() throws CsvValidationException, IOException 
 	{
-        Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
-        File file = new File("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
+        Path path = Paths.get("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv");
+        File file = new File("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv");
         Scanner inputStream = new Scanner(file);
         while (inputStream.hasNext()){
             String data = inputStream.next();
@@ -374,9 +374,6 @@ public class AddressBookMain
         System.out.println("Written file Successfully");
     }
 	
-<<<<<<< HEAD
-	
-=======
 <<<<<<< UC15
 =======
 	 public void readingFromJSONFile() throws IOException 
@@ -390,7 +387,6 @@ public class AddressBookMain
 	    }
 	 
 >>>>>>> local
->>>>>>> UC15
 	public static void main(String[] args) throws Exception 
 	{	
 		AddressBookMain abm=new AddressBookMain();

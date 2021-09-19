@@ -20,7 +20,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 
@@ -318,7 +317,7 @@ public class AddressBookMain
 	public void writeDataInCSV() throws IOException 
 	{
          Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
-    CSVWriter csvWriter = new CSVWriter(new FileWriter("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv"));
+    CSVWriter csvWriter = new CSVWriter(new FileWriter("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv"));
     if (Files.exists(path)){
         System.out.println("File Exists, so appending it ");
     }
@@ -339,8 +338,8 @@ public class AddressBookMain
 	
 	public void readFromCSVFile() throws CsvValidationException, IOException 
 	{
-        Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
-        File file = new File("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookCSV.csv");
+        Path path = Paths.get("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv");
+        File file = new File("C:\\\\Users\\\\Jeeva\\\\Desktop\\\\BridgeLabz-java\\\\AddressBookSystem\\\\Text File\\\\AddressBookCSV.csv");
         Scanner inputStream = new Scanner(file);
         while (inputStream.hasNext()){
             String data = inputStream.next();
@@ -349,48 +348,7 @@ public class AddressBookMain
         inputStream.close();
     }
 	
-	public void writingInJSONFile() throws IOException {
-        Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookJSON.json");
-        Gson gson = new Gson();
-        ArrayList<String > tp = new ArrayList<>();
-
-        if (Files.exists(path))
-            System.out.println("File exists already and will append");
-        else {
-            System.out.println("Files does not exists");
-            Files.createFile(path);
-        }
-
-        for (int i=0; i<addressBook.size(); i++){
-            tp.add(gson.toJson(addressBook.get(i)));
-        }
-        System.out.println(tp);
-        FileWriter fw = new FileWriter(String.valueOf(path));
-
-        for (String str : tp)
-            fw.write(str + "\n");
-        fw.close();
-
-        System.out.println("Written file Successfully");
-    }
 	
-<<<<<<< HEAD
-	
-=======
-<<<<<<< UC15
-=======
-	 public void readingFromJSONFile() throws IOException 
-	 {
-	        Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookJSON.json");
-	        if (!Files.exists(path))
-	            System.out.println("File not exists");
-	        else {
-	            System.out.println(Files.readAllLines(path));
-	        }
-	    }
-	 
->>>>>>> local
->>>>>>> UC15
 	public static void main(String[] args) throws Exception 
 	{	
 		AddressBookMain abm=new AddressBookMain();
@@ -406,7 +364,7 @@ public class AddressBookMain
 		    while(condition)
             {
 			     int choice = 0;
-			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Write Into file\n10. Read from file\n11. Write In CSV\n12. Read from CSV\n13. Write in JSON\n14. Read from JSON\n15. Exit");
+			     System.out.println("1. Add person \n2. Edit person \n3. Delete person \n4. View all contacts\n5. Search By City/State\n6. View By City/State\n7. Count By City/State\n8. Sort By City/State/Zip\n9. Write Into file\n10. Read from file\n11. Write In CSV\n12. Read from CSV\n13. Exit");
 			     System.out.println("Enter your choice :");
 			     Scanner sc=new Scanner(System.in);
 			     choice=sc.nextInt();
@@ -436,11 +394,7 @@ public class AddressBookMain
 			        		break;
 			        case 12:abm.readFromCSVFile();
 			        		break;
-			        case 13:abm.writingInJSONFile();
-			        		break;
-			        case 14:abm.readingFromJSONFile();
-			        		break;
-			        case 15:condition=false;
+			        case 13:condition=false;
 			               break;
 		     	 }
 	         }

@@ -373,12 +373,6 @@ public class AddressBookMain
 
         System.out.println("Written file Successfully");
     }
-	
-<<<<<<< HEAD
-	
-=======
-<<<<<<< UC15
-=======
 	 public void readingFromJSONFile() throws IOException 
 	 {
 	        Path path = Paths.get("C:\\Users\\Jeeva\\Desktop\\BridgeLabz-java\\AddressBookSystem\\Text File\\AddressBookJSON.json");
@@ -388,9 +382,6 @@ public class AddressBookMain
 	            System.out.println(Files.readAllLines(path));
 	        }
 	    }
-	 
->>>>>>> local
->>>>>>> UC15
 	public static void main(String[] args) throws Exception 
 	{	
 		AddressBookMain abm=new AddressBookMain();
